@@ -1,0 +1,16 @@
+[tool.poetry]
+name = "queueing-model"
+version = "0.1.0"
+description = ""
+authors = ["Sotnikov Arkadiy <cotnikoarkady@gmail.com>"]
+
+[tool.poetry.dependencies]
+python = "^3.10"
+streamlit = "^1.15.2"
+pyrsistent = "^0.19.2"
+
+[tool.poetry.dev-dependencies]
+
+[build-system]
+requires = ["poetry-core>=1.0.0"]
+build-backend = "poetry.core.masonry.api"
