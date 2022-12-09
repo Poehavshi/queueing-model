@@ -8,6 +8,7 @@ authors = ["Sotnikov Arkadiy <cotnikoarkady@gmail.com>"]
 python = "^3.10"
 streamlit = "^1.15.2"
 pyrsistent = "^0.19.2"
+plotly = "^5.11.0"
 
 [tool.poetry.dev-dependencies]
 

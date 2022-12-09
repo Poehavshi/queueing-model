@@ -1,7 +1,5 @@
 import numpy as np
 
-np.random.seed(1)  # fixme убрать
-
 
 def create_calls_distribution(alpha, beta, simulation_time):
     calls_starts = [-np.log(np.random.random_sample()) / alpha]
@@ -25,10 +23,8 @@ def get_distribution(alpha: float,  # показатель для времени
                      ):
     call_starts, calls_durations = create_calls_distribution(alpha, beta, simulation_time)
 
-    number_of_received_calls = 0
     number_of_rejected_calls = 0
     number_of_calls = 0
-    efficiency = 1
     busy_lines = 0
 
     lines = [dict() for _ in range(number_of_lines)]
@@ -75,23 +71,20 @@ def get_distribution(alpha: float,  # показатель для времени
                 number_of_rejected_calls += 1
         number_of_calls += 1
 
-    # for i in range(1, number_of_lines + 1):
-    #     # first_arr=[]
-    #     # second_arr=[]
-    #     self.canv.create_line(20, 60 * i, 780, 60 * i, fill='blue', width=2)
-    #     for k in lines[i - 1]:
-    #         # print(k)
-    #         self.canv.create_rectangle(20 + 760 * k / time, 60 * i - 5,
-    #                                    20 + 760 * k / time + 760 * lines[i - 1][k] / time, 60 * i + 5,
-    #                                    fill='red', width=0)
-
     busy_capacity = 0
     for cap in capacity:
         if cap[0] < simulation_time < cap[1]:
             busy_capacity += 1
 
-    return lines
+    efficiency = number_of_calls / (number_of_rejected_calls + number_of_calls)
+    busy_capacity = 0
+    for i in capacity:
+        if i[0] < simulation_time < i[1]:
+            busy_capacity += 1
+
+    return lines, number_of_calls, efficiency, number_of_rejected_calls, busy_lines + 1, busy_capacity
 
 
 if __name__ == '__main__':
+    np.random.seed(1)
     get_distribution(0.1, 0.1, 3, 1, 100)
